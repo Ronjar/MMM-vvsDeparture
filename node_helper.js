@@ -10,7 +10,7 @@
  
 var NodeHelper = require("node_helper");
 var Axios = require('axios');
-const Log = require('Logger');
+const Log = require('logger');
 
 const BASE_URL = "https://www3.vvs.de";
 
