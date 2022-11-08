@@ -16,7 +16,7 @@ Run these commands at the root of your magic mirror install.
 
 ```shell
 cd modules
-git clone https://github.com/niklaskappler/MMM-vvsDeparture
+git clone https://github.com/fhinder/MMM-vvsDeparture
 ```
 
 ## Using the module
@@ -52,7 +52,7 @@ The following properties can be configured:
 		<tr>
 			<td><code>station_id</code></td>
 			<td>A value which represents the station id of the station. The id is combined of the area prefix <code>de:08111</code> and the unique station id e.g <code>6112</code> which result to <code>de:08111:2201</code>. Here is a full list of all station with 
-				corespnding ids within the VVS public transport network, to find your station (<a href="https://www.openvvs.de/dataset/1f7ec4c1-b590-4751-a25b-57ef988c14b6/resource/d87d1f01-5c14-4d08-8452-e405a6472ab4/download/vvs_haltestellen.csv">https://www.openvvs.de/dataset/1f7ec4c1-b590-4751-a25b-57ef988c14b6/resource/d87d1f01-5c14-4d08-8452-e405a6472ab4/download/vvs_haltestellen.csv</a>).   
+				corespnding ids within the VVS public transport network, to find your station (<a href="https://www.opendata-oepnv.de/ht/de/organisation/verkehrsverbuende/vvs/startseite">https://www.opendata-oepnv.de/ht/de/organisation/verkehrsverbuende/vvs/startseite</a>).   
 				<br><br><b>Possible values:</b> <code>integer</code>
 				<br><b>Default value:</b> <code>de:08111:6112</code>
 			</td>

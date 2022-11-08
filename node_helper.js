@@ -3,13 +3,16 @@
 /* Magic Mirror
  * Module: MMM-vvsDeparture
  *
- * By niklaskappler
+ * By Fabian Hinder
+ * forked from nilaskappler
  * MIT Licensed.
  */
+ 
 var NodeHelper = require("node_helper");
-var request = require("request");
+var Axios = require('axios');
+const Log = require('Logger');
 
-const BASE_URL = "https://www3.vvs.de/mngvvs/XML_DM_REQUEST?";
+const BASE_URL = "https://www3.vvs.de";
 
 module.exports = NodeHelper.create({
 	/* socketNotificationReceived(notification, payload)
@@ -37,29 +40,38 @@ module.exports = NodeHelper.create({
 
 	retrieveStationData: function (stationId, offset, moduleIdentifier) {
 		var self = this;
-		var url = BASE_URL +
+		
+		var path = '/mngvvs/XML_DM_REQUEST?' +
 			`limit=40&`+
 			`mode=direct&`+
 			`name_dm=${stationId}&`+
 			`outputFormat=rapidJSON&`+ //`outputFormat=JSON&`
 			`type_dm=any&`+
 			`useRealtime=1`;
-
+		
 		if (offset != undefined) {
 			var d = new Date();
 			d.setMinutes(d.getMinutes() + offset);
-			url += `&itdDateYear=` + d.getFullYear().toString();
-			url += `&itdDateMonth=` + (d.getMonth() + 1).toString();
-			url += `&itdDateDay=` + d.getDate().toString();
-			url += `&itdTimeHour=` + d.getHours().toString();
-			url += `&itdTimeMinute=` + d.getMinutes().toString();
+			path += `&itdDateYear=` + d.getFullYear().toString();
+			path += `&itdDateMonth=` + (d.getMonth() + 1).toString();
+			path += `&itdDateDay=` + d.getDate().toString();
+			path += `&itdTimeHour=` + d.getHours().toString();
+			path += `&itdTimeMinute=` + d.getMinutes().toString();
 		}
+		var url = BASE_URL + path;
+		
+		var config = {
+			method: 'get',
+			url: encodeURI(url),
+			headers: {}
+		};
 
-        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-		request(url, function (error, response, body) {
-			if (!error && response.statusCode == 200) {
-				self.sendSocketNotification(moduleIdentifier+"_NEW_DEPARTURES", JSON.parse(body));
-			}
+		Axios(config)
+		.then(function (response) {
+			self.sendSocketNotification(moduleIdentifier+"_NEW_DEPARTURES", (response.data));
+		})
+		.catch(function (error) {
+			Log.error(error);
 		});
 	}
 });

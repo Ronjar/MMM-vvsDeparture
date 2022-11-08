@@ -3,7 +3,8 @@
 /* Magic Mirror
  * Module: MMM-vvsDeparture
  *
- * By niklaskappler
+ * By Fabian Hinder
+ * forked from nilaskappler
  * MIT Licensed.
  */
 Module.register("MMM-vvsDeparture", {
