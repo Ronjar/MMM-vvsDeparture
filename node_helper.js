@@ -71,7 +71,8 @@ module.exports = NodeHelper.create({
 			self.sendSocketNotification(moduleIdentifier+"_NEW_DEPARTURES", (response.data));
 		})
 		.catch(function (error) {
-			Log.error(error);
+			self.sendSocketNotification(moduleIdentifier + "_ERROR", error);
+			//Log.error(error);
 		});
 	}
 });

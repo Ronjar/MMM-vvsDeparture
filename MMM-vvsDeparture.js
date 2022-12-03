@@ -6,6 +6,7 @@
  * By Fabian Hinder
  * forked from nilaskappler
  * MIT Licensed.
+ * 
  */
 Module.register("MMM-vvsDeparture", {
 
@@ -57,10 +58,12 @@ Module.register("MMM-vvsDeparture", {
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
 		var self = this;
-		if (notification === this.identifier+"_NEW_DEPARTURES") {
+		if (notification === this.identifier + "_NEW_DEPARTURES") {
 			self.departure = payload.stopEvents;
 			self.station_name = self.config.station_name ? self.config.station_name : payload.locations[0].disassembledName;
 			self.updateDom();
+		} else if (notification === this.identifier + "_ERROR") {
+
 		}
 	},
 
