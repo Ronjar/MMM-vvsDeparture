@@ -97,11 +97,20 @@ Module.register("MMM-vvsDeparture", {
 			// Row
 			var trWrapper = document.createElement("tr");
 
+
+			var date = new Date(currentValue.departureTimePlanned);
+			// Time until
+			var tuWrapper = document.createElement("td");
+			tuWrapper.className = "timeuntil";
+			var timeUntilArrival = calculateMinutesLeft(calculateDelay(currentValue.departureTimePlanned, currentValue.departureTimeEstimated))
+			clockWrapper.innerHTML = timeUntilArrival.format("mm'");
+				trWrapper.appendChild(clockWrapper);
+
 			// Clock
 			var clockWrapper = document.createElement("td");
 			clockWrapper.className = "time";
 
-			var date = new Date(currentValue.departureTimePlanned);
+			
 			clockWrapper.innerHTML = moment(date.getHours() + ":" + date.getMinutes(), "HH:mm")
 				.subtract(currentValue.delay, "m")
 				.format("HH:mm");
@@ -185,6 +194,9 @@ Module.register("MMM-vvsDeparture", {
 		timeEstimated = new Date(departureTimeEstimated);
 		var timeDiff = new Date(timeEstimated.getTime() - timePlanned.getTime());
 		return timeDiff
+	},
+	calculateMinutesLeft(departureTime){
+		return timeDiff = new Date(departureTime - new Date().getTime)
 	},
 
 	showNumber : function(number) {
