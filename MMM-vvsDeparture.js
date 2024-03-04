@@ -103,8 +103,8 @@ Module.register("MMM-vvsDeparture", {
 			var tuWrapper = document.createElement("td");
 			tuWrapper.className = "timeuntil";
 			var timeUntilArrival = calculateMinutesLeft(calculateDelay(currentValue.departureTimePlanned, currentValue.departureTimeEstimated))
-			clockWrapper.innerHTML = timeUntilArrival.format("mm'");
-				trWrapper.appendChild(clockWrapper);
+			tuWrapper.innerHTML = timeUntilArrival.format("mm'");
+				trWrapper.appendChild(tuWrapper);
 
 			// Clock
 			var clockWrapper = document.createElement("td");
